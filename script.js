@@ -2,11 +2,10 @@
   "use strict";
 
   /* CONFIGURAÇÃO RÁPIDA
-     Troque apenas o número abaixo pelo WhatsApp comercial com DDI + DDD.
-     Exemplo: 5568999999999
-     Enquanto estiver vazio, o formulário copia a mensagem para a área de transferência.
+     WhatsApp comercial com DDI + DDD.
+     Número configurado: +55 45 98802-5563
   */
-  const WHATSAPP_NUMBER = "";
+  const WHATSAPP_NUMBER = "5545988025563";
 
   const header = document.querySelector(".site-header");
   const menuButton = document.querySelector(".menu-button");
