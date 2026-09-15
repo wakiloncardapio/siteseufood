@@ -1,0 +1,28 @@
+/* Visual R2: selo transparente + pagamento Pix/Mercado Pago */
+
+/* Benefícios do checkout: substitui visualmente o selo antigo pela versão transparente do R2. */
+.purchase-benefit{position:relative}
+.purchase-benefit .benefit-check-icon{visibility:hidden!important;background:none!important;background-image:none!important}
+.purchase-benefit::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;background:url("https://cdn.seufood.com/selo-beneficio-verde.png") center/contain no-repeat;filter:drop-shadow(0 5px 10px rgba(0,0,0,.18));pointer-events:none}
+
+/* Pagamentos: usa o mockup Pix hospedado no R2. */
+.payment-section .payment-visual{min-height:430px;background-image:url("https://cdn.seufood.com/mockup-pix-qr.png"),radial-gradient(circle at 50% 48%,rgba(33,199,171,.12),transparent 48%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));background-repeat:no-repeat;background-position:center;background-size:contain,auto,auto;overflow:hidden}
+.payment-section .payment-visual>img{display:none!important}
+
+/* Texto comercial do bloco de pagamentos. */
+.payment-section .copy h2{font-size:0!important;line-height:1.05}
+.payment-section .copy h2::before{content:"Conecte sua conta do Mercado Pago e";display:block;font-family:Outfit,system-ui,sans-serif;font-size:clamp(34px,4vw,58px);line-height:1.05;font-weight:600;letter-spacing:-.04em;color:var(--text)}
+.payment-section .copy h2::after{content:"receba os pagamentos diretamente nela.";display:block;font-family:Outfit,system-ui,sans-serif;font-size:clamp(34px,4vw,58px);line-height:1.05;font-weight:600;letter-spacing:-.04em;color:var(--green);margin-top:3px}
+.payment-section .copy .check-list::before{content:"No Seu Food, o estabelecimento pode conectar a própria conta do Mercado Pago. Assim, os pagamentos realizados pelo cliente no cardápio podem ser processados para a conta Mercado Pago vinculada ao negócio, mantendo o recebimento sob controle do próprio estabelecimento.";display:block;grid-column:1/-1;color:var(--muted);font-size:17px;line-height:1.75;margin-bottom:6px}
+.payment-section .copy .check-list li{font-size:0}
+.payment-section .copy .check-list li::before{font-size:16px}
+.payment-section .copy .check-list li:nth-child(1)::after{content:"Conecte a sua própria conta do Mercado Pago";font-size:16px;color:#d7e3da}
+.payment-section .copy .check-list li:nth-child(2)::after{content:"Receba os pagamentos na conta vinculada ao seu negócio";font-size:16px;color:#d7e3da}
+.payment-section .copy .check-list li:nth-child(3)::after{content:"Pix com QR Code para uma finalização mais rápida";font-size:16px;color:#d7e3da}
+.payment-section .copy .check-list::after{content:"✓  Checkout mais profissional e integrado ao cardápio";display:block;color:#d7e3da;font-size:16px;line-height:1.55;padding-left:0}
+
+@media(max-width:740px){
+  .purchase-benefit::before{left:11px;width:38px;height:38px}
+  .payment-section .payment-visual{min-height:360px;background-size:300px auto,auto,auto}
+  .payment-section .copy .check-list::before{font-size:16px}
+}
