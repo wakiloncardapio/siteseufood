@@ -14,6 +14,18 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
+  /* Ajusta a comunicação do FAQ de preço para uma linguagem mais comercial e clara. */
+  document.querySelectorAll(".faq-list details").forEach(item => {
+    const summary = item.querySelector("summary");
+    const answer = item.querySelector("p");
+    if (summary?.textContent.includes("O plano começa em R$ 70 por mês")) {
+      summary.textContent = "Qual é o valor do plano Seu Food?";
+      if (answer) {
+        answer.textContent = "O plano inicial do Seu Food custa R$ 70 por mês, com implementação gratuita. Entre em contato pelo WhatsApp para conhecer os recursos e escolher a melhor configuração para o seu negócio.";
+      }
+    }
+  });
+
   /* Força os arquivos corretos do R2 e elimina imagens antigas/cacheadas. */
   const cover = document.querySelector(".checkout-media img");
   if (cover) {
