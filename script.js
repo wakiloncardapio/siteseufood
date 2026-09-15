@@ -2,7 +2,6 @@
   "use strict";
 
   const WHATSAPP_NUMBER = "5545988025563";
-
   const header = document.querySelector(".site-header");
   const menuButton = document.querySelector(".menu-button");
   const mobileMenu = document.querySelector("#mobile-menu");
@@ -38,15 +37,19 @@
 
   backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("in-view"));
+  }
 
   document.querySelectorAll(".faq-list details").forEach(item => {
     item.addEventListener("toggle", () => {
@@ -57,12 +60,12 @@
     });
   });
 
-  if (parallaxCard && productStage && window.matchMedia("(pointer:fine)").matches) {
+  if (parallaxCard && productStage && window.matchMedia("(pointer:fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     parallaxCard.addEventListener("pointermove", event => {
       const rect = parallaxCard.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
-      productStage.style.transform = `perspective(1000px) rotateX(${y * -4}deg) rotateY(${x * 5}deg) translateZ(0)`;
+      productStage.style.transform = `perspective(1000px) rotateX(${y * -3.2}deg) rotateY(${x * 4}deg) translateZ(0)`;
     });
     parallaxCard.addEventListener("pointerleave", () => {
       productStage.style.transform = "perspective(1000px) rotateX(0) rotateY(0)";
@@ -83,8 +86,10 @@
     window.dataLayer.push({ event: "generate_lead", lead_source: "landing_page", business_segment: segmento });
 
     const number = WHATSAPP_NUMBER.replace(/\D/g, "");
-    formNote.textContent = "Abrindo o WhatsApp...";
-    formNote.classList.add("success");
+    if (formNote) {
+      formNote.textContent = "Abrindo o WhatsApp...";
+      formNote.classList.add("success");
+    }
     window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   });
 })();
