@@ -1,6 +1,13 @@
 (() => {
   "use strict";
 
+  if (!document.querySelector('link[href="seo.css"]')) {
+    const extraStyles = document.createElement("link");
+    extraStyles.rel = "stylesheet";
+    extraStyles.href = "seo.css";
+    document.head.appendChild(extraStyles);
+  }
+
   const WHATSAPP_NUMBER = "5545988025563";
   const header = document.querySelector(".site-header");
   const menuButton = document.querySelector(".menu-button");
