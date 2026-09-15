@@ -1,10 +1,6 @@
 (() => {
   "use strict";
 
-  /* CONFIGURAÇÃO RÁPIDA
-     WhatsApp comercial com DDI + DDD.
-     Número configurado: +55 45 98802-5563
-  */
   const WHATSAPP_NUMBER = "5545988025563";
 
   const header = document.querySelector(".site-header");
@@ -14,105 +10,81 @@
   const year = document.querySelector("#year");
   const form = document.querySelector("#lead-form");
   const formNote = document.querySelector("#form-note");
+  const parallaxCard = document.querySelector("#parallax-card");
+  const productStage = parallaxCard?.querySelector(".product-stage");
 
-  year.textContent = new Date().getFullYear();
+  if (year) year.textContent = new Date().getFullYear();
 
-  const syncScrollState = () => {
+  const syncScroll = () => {
     const y = window.scrollY;
-    header.classList.toggle("scrolled", y > 18);
-    backToTop.classList.toggle("visible", y > 650);
+    header?.classList.toggle("scrolled", y > 18);
+    backToTop?.classList.toggle("visible", y > 650);
   };
-  syncScrollState();
-  window.addEventListener("scroll", syncScrollState, { passive: true });
+  syncScroll();
+  window.addEventListener("scroll", syncScroll, { passive: true });
 
   menuButton?.addEventListener("click", () => {
-    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-    menuButton.setAttribute("aria-expanded", String(!isOpen));
-    mobileMenu.hidden = isOpen;
+    const open = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", String(!open));
+    mobileMenu.hidden = open;
   });
 
-  mobileMenu?.querySelectorAll("a").forEach((link) => {
+  mobileMenu?.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       mobileMenu.hidden = true;
-      menuButton.setAttribute("aria-expanded", "false");
+      menuButton?.setAttribute("aria-expanded", "false");
     });
   });
 
-  backToTop?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("in-view");
         obs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-  const details = [...document.querySelectorAll(".faq-list details")];
-  details.forEach((item) => {
+  document.querySelectorAll(".faq-list details").forEach(item => {
     item.addEventListener("toggle", () => {
       if (!item.open) return;
-      details.forEach((other) => {
+      document.querySelectorAll(".faq-list details").forEach(other => {
         if (other !== item) other.open = false;
       });
     });
   });
 
-  const copyText = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch (_) {
-      const area = document.createElement("textarea");
-      area.value = text;
-      area.style.position = "fixed";
-      area.style.opacity = "0";
-      document.body.appendChild(area);
-      area.select();
-      const ok = document.execCommand("copy");
-      area.remove();
-      return ok;
-    }
-  };
+  if (parallaxCard && productStage && window.matchMedia("(pointer:fine)").matches) {
+    parallaxCard.addEventListener("pointermove", event => {
+      const rect = parallaxCard.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      productStage.style.transform = `perspective(1000px) rotateX(${y * -4}deg) rotateY(${x * 5}deg) translateZ(0)`;
+    });
+    parallaxCard.addEventListener("pointerleave", () => {
+      productStage.style.transform = "perspective(1000px) rotateX(0) rotateY(0)";
+    });
+  }
 
-  form?.addEventListener("submit", async (event) => {
+  form?.addEventListener("submit", event => {
     event.preventDefault();
-
     const data = new FormData(form);
     const nome = String(data.get("nome") || "").trim();
     const empresa = String(data.get("empresa") || "").trim();
     const segmento = String(data.get("segmento") || "").trim();
-
     if (!nome || !empresa || !segmento) return;
 
-    const message =
-      `Olá! Meu nome é ${nome}. Tenho a empresa ${empresa}, do segmento ${segmento}, ` +
-      `e gostaria de conhecer melhor o Seu Food e solicitar uma apresentação da plataforma.`;
+    const message = `Olá! Meu nome é ${nome}. Tenho a empresa ${empresa}, do segmento ${segmento}, e gostaria de conhecer melhor o Seu Food e solicitar uma apresentação da plataforma.`;
 
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "generate_lead",
-      lead_source: "landing_page",
-      business_segment: segmento
-    });
+    window.dataLayer.push({ event: "generate_lead", lead_source: "landing_page", business_segment: segmento });
 
-    if (WHATSAPP_NUMBER) {
-      const cleanNumber = WHATSAPP_NUMBER.replace(/\D/g, "");
-      window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
-      formNote.textContent = "Abrindo o WhatsApp com sua mensagem...";
-      formNote.classList.add("success");
-      return;
-    }
-
-    const copied = await copyText(message);
-    formNote.textContent = copied
-      ? "Mensagem copiada. Configure o número comercial no arquivo script.js para abrir o WhatsApp automaticamente."
-      : "Configure o número comercial no arquivo script.js para ativar o envio pelo WhatsApp.";
+    const number = WHATSAPP_NUMBER.replace(/\D/g, "");
+    formNote.textContent = "Abrindo o WhatsApp...";
     formNote.classList.add("success");
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   });
 })();
