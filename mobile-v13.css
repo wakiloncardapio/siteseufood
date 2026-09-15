@@ -1,0 +1,130 @@
+/* Mobile refinements + payment list readability v13 */
+
+/* Lista de benefícios do Mercado Pago */
+.payment-copy .payment-list{
+  list-style:none!important;
+  margin:22px 0 0!important;
+  padding:0!important;
+  display:grid!important;
+  gap:12px!important;
+}
+.payment-copy .payment-list li{
+  position:relative!important;
+  display:block!important;
+  margin:0!important;
+  padding:14px 16px 14px 42px!important;
+  border:1px solid rgba(255,255,255,.065)!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.025)!important;
+  color:#e7f0e9!important;
+  min-width:0!important;
+}
+.payment-copy .payment-list li::before{
+  content:"✓"!important;
+  position:absolute!important;
+  left:15px!important;
+  top:16px!important;
+  width:18px!important;
+  height:18px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  color:#061009!important;
+  background:var(--green)!important;
+  font-family:Inter,system-ui,sans-serif!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:800!important;
+}
+.payment-copy .payment-list li strong{
+  display:block!important;
+  margin:0 0 5px!important;
+  font-family:Inter,system-ui,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.35!important;
+  letter-spacing:0!important;
+  font-weight:700!important;
+  color:#f2f8f3!important;
+}
+.payment-copy .payment-list li span{
+  display:block!important;
+  margin:0!important;
+  font-family:Inter,system-ui,sans-serif!important;
+  font-size:13.5px!important;
+  line-height:1.55!important;
+  letter-spacing:0!important;
+  font-weight:400!important;
+  color:#aebfb1!important;
+}
+.payment-copy>p{
+  max-width:620px!important;
+  font-size:15px!important;
+  line-height:1.7!important;
+  letter-spacing:0!important;
+}
+
+@media(max-width:740px){
+  /* Hero mobile */
+  .hero{overflow-x:hidden!important;padding-top:112px!important;padding-bottom:44px!important}
+  .hero .container{width:calc(100% - 36px)!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important}
+  .hero-grid{grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:100%!important;gap:24px!important;overflow:visible!important}
+  .hero-copy{min-width:0!important;width:100%!important;max-width:100%!important;overflow:visible!important}
+  .hero-copy .eyebrow{max-width:100%!important;padding:8px 11px!important;gap:8px!important;font-size:10.5px!important;line-height:1.25!important;letter-spacing:.08em!important;white-space:normal!important}
+  .hero-copy .eyebrow span{width:7px!important;height:7px!important;min-width:7px!important}
+  .hero-copy h1{width:100%!important;max-width:100%!important;margin:18px 0 16px!important;font-size:clamp(31px,8.1vw,38px)!important;line-height:1.04!important;letter-spacing:-.035em!important;font-weight:600!important;overflow-wrap:normal!important;word-break:normal!important}
+  .hero-copy p{width:100%!important;max-width:100%!important;margin:0!important;font-size:15px!important;line-height:1.58!important;letter-spacing:0!important;color:#aebfb1!important}
+  .hero-copy p strong{font-size:inherit!important;letter-spacing:inherit!important}
+  .hero-actions{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:space-between!important;gap:6px!important;width:100%!important;max-width:100%!important;margin-top:20px!important;overflow:visible!important}
+  .hero-actions .btn{display:flex!important;flex:1 1 0!important;width:auto!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;white-space:nowrap!important;text-align:center!important;padding:9px 4px!important;min-height:44px!important;font-size:clamp(9.2px,2.65vw,11px)!important;line-height:1!important;border-radius:999px!important;font-weight:600!important;letter-spacing:-.01em!important}
+  .hero-points{gap:8px 12px!important;margin-top:16px!important;font-size:12px!important;line-height:1.35!important}
+
+  /* Mockup Pix */
+  .payment-section .split{gap:20px!important}
+  .payment-section .payment-visual{min-height:240px!important;height:240px!important;padding:14px!important;background-size:190px auto,auto,auto!important;background-position:center 52%,center,center!important}
+
+  /* Texto da seção de pagamentos */
+  .payment-copy{min-width:0!important;width:100%!important;max-width:100%!important}
+  .payment-copy h2{margin-bottom:14px!important}
+  .payment-copy h2::before,.payment-copy h2::after{font-size:27px!important;line-height:1.12!important;letter-spacing:-.025em!important}
+  .payment-copy>p{font-size:14.5px!important;line-height:1.65!important;margin-bottom:0!important}
+  .payment-copy .payment-list{gap:10px!important;margin-top:18px!important}
+  .payment-copy .payment-list li{
+    padding:13px 14px 13px 40px!important;
+    border-radius:13px!important;
+  }
+  .payment-copy .payment-list li::before{
+    left:13px!important;
+    top:15px!important;
+    width:17px!important;
+    height:17px!important;
+    font-size:10px!important;
+  }
+  .payment-copy .payment-list li strong{
+    font-size:14px!important;
+    line-height:1.35!important;
+    margin-bottom:4px!important;
+  }
+  .payment-copy .payment-list li span{
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+}
+
+@media(max-width:390px){
+  .hero .container{width:calc(100% - 24px)!important}
+  .hero-copy h1{font-size:29px!important;line-height:1.05!important}
+  .hero-copy p{font-size:14px!important;line-height:1.55!important}
+  .hero-copy .eyebrow{font-size:9.2px!important;padding:7px 8px!important}
+  .hero-actions{gap:4px!important}
+  .hero-actions .btn{font-size:9px!important;padding:8px 2px!important;min-height:42px!important}
+  .payment-copy .payment-list li{padding:12px 12px 12px 38px!important}
+  .payment-copy .payment-list li::before{left:12px!important;top:14px!important}
+  .payment-copy .payment-list li strong{font-size:13.5px!important}
+  .payment-copy .payment-list li span{font-size:12.5px!important;line-height:1.5!important}
+}
+
+@media(max-width:350px){
+  .hero .container{width:calc(100% - 20px)!important}
+  .hero-actions{gap:3px!important}
+  .hero-actions .btn{font-size:8.3px!important;padding:7px 1px!important;min-height:40px!important}
+}
