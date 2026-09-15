@@ -43,6 +43,10 @@
 .payment-section .copy .check-list::after{content:"✓  Receba na conta Mercado Pago vinculada ao seu negócio"!important;display:block!important;padding:9px 12px 9px 33px!important;border:1px solid rgba(255,255,255,.055)!important;background:rgba(255,255,255,.02)!important;border-radius:12px!important;color:#dbe6dd!important;font-size:14px!important;line-height:1.35!important}
 
 @media(max-width:740px){
+  /* Hero: evita corte dos três botões no mobile */
+  .hero-actions{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;width:100%!important;max-width:100%!important;margin-top:22px!important}
+  .hero-actions .btn{width:100%!important;max-width:100%!important;min-width:0!important;white-space:normal!important;text-align:center!important;padding:12px 16px!important;min-height:50px!important;font-size:14px!important}
+
   .purchase-card{padding:15px!important;border-radius:22px!important}
   .checkout-media{aspect-ratio:2.25/1!important;border-radius:14px!important;margin-bottom:16px!important}
   .checkout-media img{border-radius:14px!important}
@@ -55,8 +59,10 @@
   .purchase-benefit::before{width:26px!important;height:26px!important}
   .purchase-benefit strong{font-size:13.5px!important}
   .purchase-benefit small{font-size:11px!important}
-  .payment-section .split{gap:24px!important}
-  .payment-section .payment-visual{min-height:300px!important;padding:12px!important;background-size:280px auto,auto,auto!important}
+
+  /* Mockup Pix: um pouco menor e com mais respiro no mobile */
+  .payment-section .split{gap:22px!important}
+  .payment-section .payment-visual{min-height:270px!important;padding:16px!important;background-size:235px auto,auto,auto!important;background-position:center 54%,center,center!important}
   .payment-section .copy h2::before,.payment-section .copy h2::after{font-size:29px!important}
   .payment-section .copy .check-list::before{font-size:14px!important;line-height:1.6!important}
   .payment-section .copy .check-list li,.payment-section .copy .check-list::after{font-size:13px!important;padding-top:8px!important;padding-bottom:8px!important}
