@@ -1,3 +1,43 @@
-@import url("./styles-base.css?v=13");
-@import url("./r2-overrides.css?v=13");
-@import url("./mobile-v13.css?v=13");
+@import url("./styles-base.css?v=14");
+@import url("./r2-overrides.css?v=14");
+@import url("./mobile-v13.css?v=14");
+
+/* Ajuste mobile da capa do plano - v14 */
+@media (max-width:740px){
+  .purchase-card .checkout-media{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:2000/768!important;
+    padding:7px!important;
+    margin:0 0 16px!important;
+    overflow:hidden!important;
+    border-radius:17px!important;
+    background:linear-gradient(180deg,rgba(19,40,27,.72),rgba(8,18,12,.9))!important;
+  }
+
+  .purchase-card .checkout-media img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:none!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    border-radius:12px!important;
+    transform:none!important;
+    margin:0 auto!important;
+  }
+}
+
+@media (max-width:390px){
+  .purchase-card .checkout-media{
+    padding:6px!important;
+    border-radius:15px!important;
+  }
+
+  .purchase-card .checkout-media img{
+    border-radius:10px!important;
+  }
+}
